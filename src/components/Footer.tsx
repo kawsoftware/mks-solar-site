@@ -49,7 +49,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-yellow-400 mr-3 mt-1 flex-shrink-0" />
-                <span className="text-blue-200">Matriz: Av. Solar, 1000 - Centro, Vitória - ES</span>
+                <span className="text-blue-200">Rua Domingos Póvoa Lemos, N° 253, Jardim Camburi, Vitória - ES, 29090-080</span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-yellow-400 mr-3 flex-shrink-0" />
