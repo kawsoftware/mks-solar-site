@@ -166,8 +166,26 @@ export default function BlogPostPage({ post, onBack }: BlogPostPageProps) {
               </div>
             </div>
             <div className="flex gap-4">
-              <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">
+              <button 
+                onClick={() => {
+                  const url = window.location.href;
+                  const text = `Confira este artigo da MKS Solar: ${post.title}`;
+                  if (navigator.share) {
+                    navigator.share({ title: post.title, text, url });
+                  } else {
+                    navigator.clipboard.writeText(url).then(() => {
+                      const btn = document.getElementById('share-btn');
+                      if (btn) {
+                        btn.textContent = 'Link copiado!';
+                        setTimeout(() => { btn.textContent = ''; }, 2000);
+                      }
+                    });
+                  }
+                }}
+                className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors flex items-center gap-2"
+              >
                 <Share2 className="h-5 w-5" />
+                <span id="share-btn" className="text-sm"></span>
               </button>
             </div>
           </div>
