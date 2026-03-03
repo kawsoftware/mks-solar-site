@@ -42,7 +42,7 @@ export default function App() {
                     preload="metadata"
                     poster=""
                   >
-                    <source src="institucional.mp4" type="video/mp4" />
+                    <source src="video-institucional.mp4" type="video/mp4" />
                     Seu navegador não suporta a reprodução de vídeos.
                   </video>
                 </div>
