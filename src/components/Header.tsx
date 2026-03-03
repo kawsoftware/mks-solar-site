@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Menu, X, Sun, Phone, FileText, Wrench } from 'lucide-react';
+import QuoteModal from './QuoteModal';
+import MaintenanceModal from './MaintenanceModal';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [isMaintenanceOpen, setIsMaintenanceOpen] = useState(false);
 
   const navItems = [
     { name: 'Principal', href: '#' },
@@ -37,15 +41,34 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                {item.name}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isAction = item.href.startsWith('#orcamento') || item.href.startsWith('#manutencao');
+              
+              if (isAction) {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      if (item.href === '#orcamento') setIsQuoteOpen(true);
+                      if (item.href === '#manutencao') setIsMaintenanceOpen(true);
+                    }}
+                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    {item.name}
+                  </button>
+                );
+              }
+
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  {item.name}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -64,19 +87,42 @@ export default function Header() {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isAction = item.href.startsWith('#orcamento') || item.href.startsWith('#manutencao');
+
+              if (isAction) {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      if (item.href === '#orcamento') setIsQuoteOpen(true);
+                      if (item.href === '#manutencao') setIsMaintenanceOpen(true);
+                    }}
+                    className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                  >
+                    {item.name}
+                  </button>
+                );
+              }
+
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
           </div>
         </div>
       )}
+      {/* Modals */}
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+      <MaintenanceModal isOpen={isMaintenanceOpen} onClose={() => setIsMaintenanceOpen(false)} />
     </header>
   );
 }

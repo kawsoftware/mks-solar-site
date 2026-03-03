@@ -29,3 +29,13 @@ export function getWhatsAppLink(context?: string): string {
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
+
+export function getQuoteWhatsAppLink(data: { name: string; phone: string; email: string; city: string; billAmount: string }): string {
+  const message = `Olá, MKS Solar! 👋\n\nGostaria de solicitar um *Orçamento Detalhado*.\n\n*Meus Dados:*\n👤 Nome: ${data.name}\n📱 Telefone: ${data.phone}\n📧 E-mail: ${data.email}\n📍 Cidade/Estado: ${data.city}\n💰 Valor médio da conta de luz: R$ ${data.billAmount}\n\nFico no aguardo do contato de um especialista!`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export function getMaintenanceWhatsAppLink(data: { name: string; phone: string; systemSize: string; timeInstalled: string; issue: string }): string {
+  const message = `Olá, MKS Solar! 👋\n\nGostaria de solicitar uma *Manutenção Preventiva / Suporte Técnico* para o meu sistema.\n\n*Meus Dados e Informações do Sistema:*\n👤 Nome: ${data.name}\n📱 Telefone: ${data.phone}\n⚡ Tamanho do Sistema: ${data.systemSize} (kWp ou Qtd Módulos)\n⏳ Tempo de Instalação: ${data.timeInstalled}\n\n*Descrição / Observações:*\n${data.issue}\n\nAguardo o retorno para agendarmos a visita!`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
