@@ -30,14 +30,14 @@ export default function BlogPostPage({ post, onBack }: BlogPostPageProps) {
       </div>
 
       {/* Hero Header */}
-      <div className="relative h-[60vh] w-full overflow-hidden">
+      <div className="relative min-h-[60vh] md:h-[60vh] w-full overflow-hidden flex flex-col justify-end">
         <img 
           src={post.image} 
           alt={post.title} 
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 max-w-7xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
+        <div className="relative z-10 w-full p-8 pb-20 md:p-16 md:pb-24 max-w-7xl mx-auto mt-auto">
           <button 
             onClick={onBack}
             className="flex items-center text-white/80 hover:text-white mb-6 transition-colors group"
